@@ -8,5 +8,7 @@ desktop.ini
 # Editor / OS junk
 Thumbs.db
 
-# Build tools (one-off extractor for Figma Make bundle)
+# Build tools (one-off extractor for Figma Make bundle, multi-page generator)
 extract.js
+generate-pages.js
+.original-index.html
