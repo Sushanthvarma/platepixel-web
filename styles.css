@@ -3481,4 +3481,43 @@ section { position: relative; z-index: 2; }
   .marquee, .marquee-v2 { display: none; }
   .hero-v2 { padding-top: 24px; padding-bottom: 20px; }
 }
+
+/* ==== Round-2 mobile polish (added after a second pass) ==== */
+@media (max-width: 720px) {
+  /* Work card: the absolute-positioned device-frame mockup eats the whole
+     image on a small screen. Show the photo cleanly; the live-demo CTA
+     still lives in the work copy below. */
+  .work-card-lg .work-image { aspect-ratio: 16 / 10; }
+  .device-frame { display: none; }
+
+  /* Stack diagram layer headings shrink so they don't crash into the rail */
+  .layer h3 { font-size: clamp(22px, 6.2vw, 28px); }
+  .layer-body p { font-size: 14.5px; }
+
+  /* Section vertical rhythm — pull big sections in by ~25% on phones */
+  .industries, .founder, .work, .contact, .pricing, .stack, .platform, .copilot, .faq, .cta {
+    padding-top: clamp(56px, 9vw, 80px);
+    padding-bottom: clamp(56px, 9vw, 80px);
+  }
+
+  /* Curator: ensure textarea is tall enough to type comfortably */
+  .curator-input { min-height: 110px; }
+
+  /* Brief mock (AI copilot section) padding tightened */
+  .brief-mock { padding: 18px 18px 20px; }
+
+  /* Notched iPhones — respect the safe-area at the bottom on fixed/sticky bars */
+  .footer-bottom { padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .nav { padding-left: max(var(--gutter), env(safe-area-inset-left));
+         padding-right: max(var(--gutter), env(safe-area-inset-right)); }
+}
+
+@media (max-width: 480px) {
+  /* Stats: at the very narrowest, single-column reads better than 2x2 */
+  .stats-grid { grid-template-columns: 1fr; gap: 22px; }
+  .stat { border-left: 0; padding-left: 0; }
+
+  /* CTA heading shrinks so it doesn't span 4 lines */
+  .cta-heading { font-size: clamp(28px, 9vw, 36px); }
+  .cta-sub { font-size: 14.5px; }
 }
