@@ -3334,3 +3334,151 @@ section { position: relative; z-index: 2; }
   .marquee-track-v2 { font-size: 16px; gap: 28px; }
   .brief-list li { grid-template-columns: 22px 1fr; gap: 10px; font-size: 13.5px; }
 }
+
+/* =====================================================================
+   MOBILE HARDENING — applies ONLY when viewport <= 720px (i.e. phones).
+   All rules scoped inside media queries; desktop layout unaffected.
+   The viewport meta tag (width=device-width,initial-scale=1) ensures
+   phones report their real CSS width so these queries trigger correctly.
+   ===================================================================== */
+
+@media (max-width: 720px) {
+  /* iOS auto-zoom guard: any text input >= 16px stays put on focus */
+  .curator-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  input[type="tel"],
+  textarea,
+  select { font-size: 16px; }
+
+  /* Tap target hygiene — 44px is the iOS HIG / WCAG 2.5.5 minimum */
+  .chip {
+    min-height: 44px;
+    padding: 11px 14px;
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn { min-height: 46px; padding: 13px 20px; }
+  .btn-lg { min-height: 52px; padding: 16px 24px; font-size: 14px; }
+  .btn-sm { min-height: 40px; padding: 11px 16px; font-size: 12.5px; }
+
+  /* CTA button rows: stack and fill width so thumbs can hit them easily */
+  .cta-buttons { flex-direction: column; align-items: stretch; gap: 12px; }
+  .cta-buttons .btn { width: 100%; justify-content: center; }
+  .curator-chips { gap: 8px; }
+
+  /* Mobile menu links: bigger tap area, bigger text */
+  .nav.menu-open .nav-links a {
+    padding: 14px 0;
+    font-size: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav.menu-open .nav-links a:last-of-type { border-bottom: 0; }
+  .nav.menu-open .nav-cta-mobile {
+    margin-top: 12px;
+    min-height: 50px;
+    padding: 14px 22px;
+  }
+
+  /* Container/section padding: tighter on phones so cards don't squeeze */
+  .container { padding-left: 18px; padding-right: 18px; }
+
+  /* Hero v2: less vertical breathing room above-the-fold on phones */
+  .hero-v2 { padding-top: 36px; padding-bottom: 28px; }
+  .hero-trust-v2,
+  .hero-trust { flex-wrap: wrap; gap: 16px; }
+  .avatars .avatar { width: 32px; height: 32px; }
+
+  /* Stats: 2x2 grid, clamp the giant numbers so they don't overflow */
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+  .stat { padding-left: 14px; border-left: 1px solid var(--line); }
+  .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .stat-num { font-size: clamp(36px, 11vw, 56px); }
+
+  /* Pricing cards: smaller stack chips so they don't overflow on iPhone SE */
+  .price-stack { gap: 5px; }
+  .ps-chip { font-size: 10.5px; padding: 4px 9px; }
+  .price-amount { font-size: clamp(32px, 9vw, 42px); }
+
+  /* FAQ: bigger tap target on the whole summary row, smaller q-text */
+  .faq-item summary { padding: 20px 4px; font-size: 15.5px; gap: 16px; }
+  .faq-item summary i { width: 26px; height: 26px; }
+
+  /* Industries: even tighter image strip on phones */
+  .ind-image { height: 150px; }
+  .ind-body { padding: 20px 22px 24px; }
+  .ind-body h3 { font-size: 26px; }
+
+  /* Footer: single column, link rows comfortable to tap */
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 28px; }
+  .footer-col a { padding: 6px 0; display: inline-block; }
+  .footer-bottom { font-size: 11.5px; text-align: center; }
+
+  /* Section labels (the circle 01/02): smaller so they don't dominate */
+  .section-label { font-size: 11px; gap: 10px; }
+  .section-label span { width: 30px; height: 30px; font-size: 10.5px; }
+
+  /* Curator result cards: tighter padding */
+  .result-item { padding: 16px; gap: 12px; }
+  .result-item-num { font-size: 11px; }
+  .result-item-name { font-size: 15.5px; }
+  .result-item-why { font-size: 13px; }
+  .result-foot { padding: 16px; gap: 14px; }
+
+  /* Founder: tighter row on phones (in addition to existing 540px rule) */
+  .founder-row { grid-template-columns: 76px 1fr; }
+  .founder-initial { font-size: 40px; }
+  .founder-name { font-size: 20px; }
+
+  /* Contact cards: comfortable tap, full-width */
+  .contact-card { padding: 24px 22px; }
+  .contact-value { font-size: 19px; word-break: break-word; }
+
+  /* Marquee: slow it down feels less frantic on small screens */
+  .marquee-track { font-size: 14px; gap: 24px; }
+}
+
+/* ==== Super-tight breakpoint for small phones (iPhone SE ~375px etc.) ==== */
+@media (max-width: 480px) {
+  :root { --gutter: 16px; }
+
+  .display, .display-v2 { font-size: clamp(34px, 11.5vw, 46px); line-height: 1.05; }
+  .h-display { font-size: clamp(28px, 9vw, 38px); line-height: 1.1; }
+  .lede, .lede-v2 { font-size: 15.5px; line-height: 1.55; }
+
+  .nav { padding: 12px 16px; }
+  .brand-name { font-size: 17px; }
+  .brand-mark { width: 30px; height: 30px; }
+
+  .curator-frame { padding: 14px; border-radius: 12px; }
+  .curator-input { padding: 14px 14px; }
+  .chip { padding: 10px 12px; font-size: 12px; }
+
+  .hero-trust-v2 .trust-text,
+  .hero-trust .trust-text { font-size: 12.5px; }
+
+  .footer-grid { gap: 24px; }
+  .footer-bottom { gap: 8px; }
+}
+
+/* ==== Touch / no-hover device adjustments (most phones + tablets) ====
+   Disables hover-only reveal effects that get stuck "active" after a tap. */
+@media (hover: none) and (pointer: coarse) {
+  .work-card:hover { transform: none; }
+  .ind-card:hover { transform: none; }
+  .price-card:hover { transform: none; }
+  .contact-card:hover { transform: none; }
+  .founder-row:hover { transform: none; box-shadow: none; }
+  .founder-row:hover::before { opacity: 0; }
+  /* Underline-on-hover for nav: skip on touch (focus state still works) */
+  .nav-links a:hover::after { transform: scaleX(0); }
+}
+
+/* Landscape phones: hide the marquee strip (visual noise in a short viewport) */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 480px) {
+  .marquee, .marquee-v2 { display: none; }
+  .hero-v2 { padding-top: 24px; padding-bottom: 20px; }
+}
+}
