@@ -1,8 +1,6 @@
 # PlatePixel — Pending Items Before Public Launch
 
 ## Critical (do not launch without)
-- [ ] Real WhatsApp number (find all `data-placeholder="real-whatsapp"` in index.html)
-- [ ] Real phone number on the contact line in footer
 - [ ] **Testimonials section now references businesses we removed from Selected Work** (Fire & Stone, Saffron House, Olive Café). Decide: remove section, replace with real Ozone Salon client quotes, or rewrite as anonymized.
 - [ ] Optional: replace the stock salon photo (Unsplash, Benyamin Bohlouli — `assets/salon-hero.jpg`) with a real photo of your client's salon space once available.
 - [ ] Decide curator backend path: smart-template-only (Path A) or real Anthropic API (Path B)
