@@ -1,7 +1,8 @@
 # PlatePixel — Pending Items Before Public Launch
 
 ## Critical (do not launch without)
-- [ ] **Testimonials section now references businesses we removed from Selected Work** (Fire & Stone, Saffron House, Olive Café). Decide: remove section, replace with real Ozone Salon client quotes, or rewrite as anonymized.
+- [ ] **Add a founder / "Why PlatePixel exists" section.** The GPT review flagged this as the single biggest missed opportunity. For service businesses, people buy founders before products. Needs: a short story (what you noticed, why restaurant tech is fragmented, why you built this), a real photo, and your name. I can wire it in once you give me the words.
+- [ ] **Add 2–4 more real case studies.** Ozone Salon is the only one. The GPT review called this "the biggest single risk to conversion." Need: real client names you have permission to share, what you built, real metrics (or "in progress" if metrics aren't measurable yet), and 1–2 screenshots each.
 - [ ] Optional: replace the stock salon photo (Unsplash, Benyamin Bohlouli — `assets/salon-hero.jpg`) with a real photo of your client's salon space once available.
 - [ ] Decide curator backend path: smart-template-only (Path A) or real Anthropic API (Path B)
 - [ ] If Path B: provision ANTHROPIC_API_KEY in Vercel, add Upstash rate limiting
