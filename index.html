@@ -3101,16 +3101,21 @@ section { position: relative; z-index: 2; }
   pointer-events: none;
 }
 .founder-grid {
-  display: grid;
-  grid-template-columns: minmax(220px, 320px) 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 5vw, 64px);
   margin-top: clamp(36px, 5vw, 56px);
   position: relative;
   z-index: 1;
 }
+.founder-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2.4vw, 32px);
+  max-width: 560px;
+}
 .founder-photo {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   border-radius: 14px;
   background:
     radial-gradient(120% 80% at 30% 20%, rgba(193,154,114,.22), transparent 60%),
@@ -3135,7 +3140,7 @@ section { position: relative; z-index: 2; }
 }
 .founder-monogram {
   font-family: var(--serif);
-  font-size: clamp(80px, 11vw, 140px);
+  font-size: clamp(64px, 8vw, 96px);
   font-style: italic;
   font-weight: 400;
   color: var(--copper-hi);
@@ -3157,13 +3162,13 @@ section { position: relative; z-index: 2; }
   display: flex;
   flex-direction: column;
   gap: 18px;
+  max-width: 68ch;
 }
 .founder-story p {
   font-family: var(--serif);
-  font-size: clamp(18px, 1.6vw, 22px);
+  font-size: clamp(18px, 1.55vw, 22px);
   line-height: 1.55;
   color: var(--text);
-  max-width: 56ch;
 }
 .founder-story p:first-of-type::first-letter {
   font-style: italic;
@@ -3182,9 +3187,9 @@ section { position: relative; z-index: 2; }
 }
 .founder-sig b { color: var(--copper-hi); font-weight: 500; }
 
-@media (max-width: 840px) {
-  .founder-grid { grid-template-columns: 1fr; gap: 32px; }
-  .founder-photo { max-width: 240px; aspect-ratio: 4 / 5; }
+@media (max-width: 540px) {
+  .founder-photos { gap: 14px; }
+  .founder-monogram { font-size: clamp(56px, 18vw, 80px); }
 }
 
 /* ============ CONTACT ============ */
@@ -3830,17 +3835,23 @@ section { position: relative; z-index: 2; }
     </div>
 
     <div class="founder-grid">
-      <div class="founder-photo reveal">
-        <div class="founder-monogram">S</div>
-        <div class="founder-photo-tag">Sumanth · Founder</div>
+      <div class="founder-photos reveal">
+        <div class="founder-photo">
+          <div class="founder-monogram">S</div>
+          <div class="founder-photo-tag">Sumanth · Co-founder</div>
+        </div>
+        <div class="founder-photo">
+          <div class="founder-monogram">SV</div>
+          <div class="founder-photo-tag">Sushanth Varma · Co-founder</div>
+        </div>
       </div>
       <div class="founder-story reveal">
-        <p>I grew up watching small businesses around me — restaurants, salons, neighbourhood stores — pay enterprise prices for stitched-together software that doesn't talk to itself.</p>
+        <p>We grew up watching small businesses around us — restaurants, salons, neighbourhood stores — pay enterprise prices for stitched-together software that doesn't talk to itself.</p>
         <p>Three vendors for the website. Another for the POS. A spreadsheet for inventory. WhatsApp screenshots for customer follow-ups. Nothing learns anything from anything else.</p>
         <p>Meanwhile every Fortune 500 has an AI team turning the same kind of data — sales, inventory, customer history — into a real operating advantage. Small businesses don't.</p>
-        <p>PlatePixel is my answer to that gap. We design the brand. We build the digital stack — site, catalog, POS, ERP. And we integrate AI into the workflows that already run the business, so the café in Hyderabad gets the same operating leverage as the chain on the cover of a magazine.</p>
+        <p>PlatePixel is our answer to that gap. We design the brand. We build the digital stack — site, catalog, POS, ERP. And we integrate AI into the workflows that already run the business, so the café in Hyderabad gets the same operating leverage as the chain on the cover of a magazine.</p>
         <p>We're in early pilot. The Ozone Salon POS in our portfolio is one of the first systems we've shipped end-to-end. More are in flight. If your business deserves a sharper brain — <a href="#contact" style="color:var(--copper-hi);">talk to us</a>.</p>
-        <div class="founder-sig">— <b>Sumanth</b> · Founder, PlatePixel · Hyderabad</div>
+        <div class="founder-sig">— <b>Sumanth</b> &amp; <b>Sushanth Varma</b> · Co-founders, PlatePixel · Hyderabad</div>
       </div>
     </div>
   </div>
