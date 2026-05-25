@@ -3520,4 +3520,29 @@ section { position: relative; z-index: 2; }
   /* CTA heading shrinks so it doesn't span 4 lines */
   .cta-heading { font-size: clamp(28px, 9vw, 36px); }
   .cta-sub { font-size: 14.5px; }
+
+  /* Announcement bar reads smaller on tiny phones */
+  .announce-track { font-size: 10.5px; gap: 36px; }
+  .announce-track span { gap: 10px; }
 }
+
+/* ==== Reduced-motion accessibility — respect OS setting ====
+   Pauses infinite marquees, kills reveal-on-scroll transitions, and
+   shortens any decorative animation to near-zero. Required for users
+   with vestibular disorders, and saves battery on phones. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track, .marquee-track-v2, .announce-track { animation: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==== Native smooth-scroll fallback ====
+   Our JS handler smooths in-page anchor clicks, but address-bar hash
+   changes and browser-restored scroll positions also benefit from this.
+   Suppressed under prefers-reduced-motion above. */
+html { scroll-behavior: smooth; }
