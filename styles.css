@@ -2107,9 +2107,16 @@ section { position: relative; z-index: 2; }
     position: absolute; top: 100%; left: 0; right: 0;
     background: rgba(8,7,5,.95);
     backdrop-filter: blur(20px);
-    padding: 24px var(--gutter) 32px;
+    padding: 24px var(--gutter) 28px;
     border-bottom: 1px solid var(--line);
     gap: 20px;
+  }
+  .nav-cta-mobile { display: none; }
+  .nav.menu-open .nav-cta-mobile {
+    display: inline-flex;
+    margin-top: 8px;
+    justify-content: center;
+    width: 100%;
   }
   .brand-tag { display: none; }
   .display { font-size: clamp(42px, 11vw, 60px); }
@@ -2965,10 +2972,10 @@ section { position: relative; z-index: 2; }
 .dot.next  { background: var(--text-3); }
 
 .ind-image {
-  height: 240px;
+  height: 170px;
   background-size: cover;
   background-position: center;
-  filter: brightness(.7) contrast(1.05) saturate(.85);
+  filter: brightness(.85) contrast(1.05) saturate(.9);
   transition: transform 1.2s var(--ease);
 }
 .ind-card:hover .ind-image { transform: scale(1.04); }
@@ -3006,7 +3013,7 @@ section { position: relative; z-index: 2; }
   color: var(--copper);
   font-family: var(--mono);
 }
-.ind-soon .ind-image, .ind-next .ind-image { filter: brightness(.55) contrast(1) saturate(.7) blur(.5px); }
+.ind-soon .ind-image, .ind-next .ind-image { filter: brightness(.7) contrast(1) saturate(.78) blur(.4px); }
 .ind-next { opacity: 0.86; }
 
 /* ============ PRICING V2 — stack chips ============ */
@@ -3105,13 +3112,18 @@ section { position: relative; z-index: 2; }
 }
 .founder-photo-tag {
   position: absolute;
-  bottom: 14px;
-  left: 14px;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.32em;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
   color: var(--text-3);
   text-transform: uppercase;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .founder-story {
   display: flex;

@@ -52,17 +52,34 @@
     io.observe(el);
   });
 
-  // Smooth-scroll offset for sticky nav
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
+  // Smooth-scroll offset for sticky nav.
+  // Handles both "#hash" (same page) and "/path#hash" or "/#hash" links that
+  // resolve to the current page — so cross-page CTAs like "/#curator" scroll
+  // smoothly instead of doing a full reload when already on home.
+  const isSamePage = (href) => {
+    try {
+      const url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin) return null;
+      const samePath = url.pathname === window.location.pathname
+        || (url.pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, ''));
+      if (!samePath || !url.hash || url.hash.length < 2) return null;
+      return url.hash;
+    } catch (_) { return null; }
+  };
+
+  document.querySelectorAll('a[href]').forEach(a => {
+    const raw = a.getAttribute('href');
+    if (!raw || (!raw.startsWith('#') && !raw.includes('#'))) return;
     a.addEventListener('click', (e) => {
-      const href = a.getAttribute('href');
-      if (href.length < 2) return;
-      const target = document.querySelector(href);
+      const hash = raw.startsWith('#') ? (raw.length > 1 ? raw : null) : isSamePage(raw);
+      if (!hash) return;
+      const target = document.querySelector(hash);
       if (!target) return;
       e.preventDefault();
       const navHeight = nav.getBoundingClientRect().height;
       const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
       window.scrollTo({ top, behavior: 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', hash);
     });
   });
 
@@ -107,11 +124,11 @@
 
   /* ---------- chip presets ---------- */
   const CHIP_PRESETS = {
-    cafe: "We run a 30-seat café in Bandra. Strong Instagram (12k), no website, no real menu — diners message us for hours and the menu lives in a screenshot. We do brunch and small plates. Just one outlet.",
-    restaurant: "We run a North-Indian restaurant with three outlets in Mumbai. Solid Zomato but very few direct bookings. POS is a mix of two old systems, inventory is on Excel. Opening a fourth outlet in three months.",
-    cloud: "We run a cloud kitchen with four brands operating out of one Bengaluru kitchen. Heavy aggregator dependency — Swiggy + Zomato take 28%. We want our own ordering site and better forecasting because wastage is killing margins.",
-    retail: "We run a boutique skincare store in Pune with two locations. Selling online via Instagram DMs, no real website or catalog. POS is a basic Zoho setup, inventory is mostly in someone's head.",
-    bakery: "We run a small patisserie with one storefront and a strong wholesale business to cafés. We do custom-order birthday cakes online via WhatsApp. Cream costs are killing us; we suspect our supplier markup but can't prove it."
+    cafe: "We run a 30-seat café in Jubilee Hills. Strong Instagram (12k), no website, no real menu — diners message us for hours and the menu lives in a screenshot. We do brunch and small plates. Just one outlet.",
+    restaurant: "We run a South-Indian restaurant with three outlets across Hyderabad — Banjara Hills, Gachibowli, and Madhapur. Solid Zomato but very few direct bookings. POS is a mix of two old systems, inventory is on Excel. Opening a fourth outlet in three months.",
+    cloud: "We run a cloud kitchen with four brands operating out of one Kondapur kitchen. Heavy aggregator dependency — Swiggy + Zomato take 28%. We want our own ordering site and better forecasting because wastage is killing margins.",
+    retail: "We run a boutique skincare store in Hyderabad with two locations (Jubilee Hills and Kondapur). Selling online via Instagram DMs, no real website or catalog. POS is a basic Zoho setup, inventory is mostly in someone's head.",
+    bakery: "We run a small patisserie in Banjara Hills with one storefront and a strong wholesale business to cafés. We do custom-order birthday cakes online via WhatsApp. Cream costs are killing us; we suspect our supplier markup but can't prove it."
   };
 
   chips.forEach(c => {

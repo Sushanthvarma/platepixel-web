@@ -18,7 +18,7 @@
 - [ ] Privacy / Terms / Data / Sitemap pages (currently all link to `#`)
 - [ ] Skip-to-main accessibility link at top of body
 - [ ] Replace empty <textarea> placeholder when AI returns malformed JSON repeatedly
-- [ ] Curator placeholder still mentions "Bandra" (Mumbai) — update to Hyderabad-relevant example to match new positioning
+- [x] ~~Curator placeholder still mentions "Bandra" (Mumbai) — update to Hyderabad~~ (Done — placeholder + chip presets now Hyderabad: Jubilee Hills, Banjara Hills, Gachibowli, Madhapur, Kondapur)
 
 ## Strategic (post-launch)
 - [ ] Decide brand boundary: restaurants-first-then-retail OR generic SMB IT (current copy is muddled)
