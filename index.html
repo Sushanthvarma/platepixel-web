@@ -961,10 +961,28 @@ body::before {
 }
 .section-label span {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border: 1px solid var(--line-strong);
+  width: 34px; height: 34px; border: 1px solid var(--line-strong);
   border-radius: 50%; font-size: 11px;
   background: rgba(193,154,114,.04);
+  position: relative;
+  transition: border-color .4s var(--ease), background .4s var(--ease);
 }
+.section-label span::after {
+  content: "";
+  position: absolute;
+  top: -3px; right: -3px;
+  width: 6px; height: 6px;
+  background: var(--copper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--bg);
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+.section-head:hover .section-label span {
+  border-color: var(--copper);
+  background: rgba(193,154,114,.08);
+}
+.section-head:hover .section-label span::after { opacity: 1; }
 
 .lede {
   font-size: clamp(16px, 1.15vw, 19px);
@@ -1090,14 +1108,17 @@ section { position: relative; z-index: 2; }
   color: var(--copper);
 }
 .brand-mark { width: 38px; height: 38px; flex-shrink: 0; color: var(--copper); }
-.brand-text { display: flex; flex-direction: column; gap: 2px; }
+.brand-text { display: flex; flex-direction: column; gap: 3px; }
 .brand-name {
-  font-family: var(--mono);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  font-size: 16px;
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-size: 22px;
   color: var(--text);
+  line-height: 1;
 }
+.brand-name::first-letter,
+.brand-name { font-variant-ligatures: discretionary-ligatures; }
 .brand-tag {
   font-family: var(--mono);
   font-weight: 400;
@@ -3064,6 +3085,108 @@ section { position: relative; z-index: 2; }
 .price-card.featured .ps-chip { background: rgba(193,154,114,.10); }
 .price-card.featured .ps-chip-ai { background: var(--copper); color: #1a120a; }
 
+/* ============ FOUNDER ============ */
+.founder {
+  padding: clamp(72px, 9vw, 120px) 0;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.founder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(800px 400px at 75% 0%, rgba(193,154,114,.06), transparent 60%);
+  pointer-events: none;
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  margin-top: clamp(36px, 5vw, 56px);
+  position: relative;
+  z-index: 1;
+}
+.founder-photo {
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(193,154,114,.22), transparent 60%),
+    linear-gradient(160deg, #1a1410 0%, #221814 55%, #2e2118 100%);
+  border: 1px solid var(--line-strong);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.founder-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(2px 2px at 12% 30%, rgba(255,255,255,.06), transparent),
+    radial-gradient(1px 1px at 75% 20%, rgba(255,255,255,.05), transparent),
+    radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.04), transparent),
+    radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,.05), transparent);
+  pointer-events: none;
+}
+.founder-monogram {
+  font-family: var(--serif);
+  font-size: clamp(80px, 11vw, 140px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--copper-hi);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow: 0 4px 30px rgba(193,154,114,.25);
+}
+.founder-photo-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+.founder-story {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.founder-story p {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.55;
+  color: var(--text);
+  max-width: 56ch;
+}
+.founder-story p:first-of-type::first-letter {
+  font-style: italic;
+  color: var(--copper-hi);
+  font-size: 1.15em;
+}
+.founder-sig {
+  margin-top: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+  text-transform: uppercase;
+}
+.founder-sig b { color: var(--copper-hi); font-weight: 500; }
+
+@media (max-width: 840px) {
+  .founder-grid { grid-template-columns: 1fr; gap: 32px; }
+  .founder-photo { max-width: 240px; aspect-ratio: 4 / 5; }
+}
+
 /* ============ CONTACT ============ */
 .contact {
   padding: clamp(64px, 8vw, 110px) 0;
@@ -3200,7 +3323,7 @@ section { position: relative; z-index: 2; }
     <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
       <circle cx="30" cy="34" r="22" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
       <circle cx="30" cy="34" r="10.5" fill="currentColor"></circle>
-      <rect x="42" y="14" width="9" height="4.5" rx="2.25" fill="currentColor"></rect>
+      <path d="M48.5 10l1.6 4.4 4.4 1.6-4.4 1.6-1.6 4.4-1.6-4.4-4.4-1.6 4.4-1.6z" fill="currentColor"></path>
     </svg>
     <div class="brand-text">
       <div class="brand-name">PLATEPIXEL</div>
@@ -3232,13 +3355,13 @@ section { position: relative; z-index: 2; }
   <div class="hero-inner-v2">
 
     <div class="hero-copy-v2 reveal">
-      <div class="eyebrow"><span class="eyebrow-dot"></span> Your AI partner — design, build, integrate</div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span> AI for small businesses — design, build, integrate</div>
       <h1 class="display display-v2">
         From your <em>data</em><br>
         to your <em>decisions.</em>
       </h1>
       <p class="lede lede-v2">
-        PlatePixel brings AI to small organisations. We design the brand, build the digital stack — site, catalog, POS, ERP — and integrate AI into the workflows that learn your business. Tell us about your business. Get a curated proposal in under a minute.
+        We design the brand, build the digital stack — site, catalog, POS, ERP — and integrate AI into the workflows that already run the business. Tell us where you are. Get a curated proposal in under a minute.
       </p>
 
       <!-- ===== AI CURATOR ===== -->
@@ -3557,7 +3680,7 @@ section { position: relative; z-index: 2; }
     <div class="section-head reveal copilot-head">
       <div class="section-label section-label-hi"><span>03</span> AI Enablement</div>
       <h2 class="h-display">Not one product.<br><em>AI woven</em><br>through the work.</h2>
-      <p class="section-sub">We don't sell a single AI copilot. We bring AI into the workflows you already run — Claude/GPT inside customer ops, automation across WhatsApp and email, analytics that turn raw POS data into the next decision, and custom AI tools we build for your shape of business. Below: four of the things this looks like in practice.</p>
+      <p class="section-sub">We don't sell one packaged AI copilot. We bring AI into the workflows you already run — Claude / GPT inside customer ops, WhatsApp automation, analytics that turn POS data into decisions, and custom AI tools shaped to your business. Four examples below.</p>
     </div>
 
     <div class="copilot-grid">
@@ -3698,11 +3821,36 @@ section { position: relative; z-index: 2; }
   </div>
 </section>
 
+<!-- ============== FOUNDER / WHY ============== -->
+<section class="founder" id="founder">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label"><span>05</span> Why PlatePixel</div>
+      <h2 class="h-display">Built where small businesses<br>get <em>left behind.</em></h2>
+    </div>
+
+    <div class="founder-grid">
+      <div class="founder-photo reveal">
+        <div class="founder-monogram">S</div>
+        <div class="founder-photo-tag">Sumanth · Founder</div>
+      </div>
+      <div class="founder-story reveal">
+        <p>I grew up watching small businesses around me — restaurants, salons, neighbourhood stores — pay enterprise prices for stitched-together software that doesn't talk to itself.</p>
+        <p>Three vendors for the website. Another for the POS. A spreadsheet for inventory. WhatsApp screenshots for customer follow-ups. Nothing learns anything from anything else.</p>
+        <p>Meanwhile every Fortune 500 has an AI team turning the same kind of data — sales, inventory, customer history — into a real operating advantage. Small businesses don't.</p>
+        <p>PlatePixel is my answer to that gap. We design the brand. We build the digital stack — site, catalog, POS, ERP. And we integrate AI into the workflows that already run the business, so the café in Hyderabad gets the same operating leverage as the chain on the cover of a magazine.</p>
+        <p>We're in early pilot. The Ozone Salon POS in our portfolio is one of the first systems we've shipped end-to-end. More are in flight. If your business deserves a sharper brain — <a href="#contact" style="color:var(--copper-hi);">talk to us</a>.</p>
+        <div class="founder-sig">— <b>Sumanth</b> · Founder, PlatePixel · Hyderabad</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============== SELECTED WORK ============== -->
 <section class="work" id="work">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-label"><span>05</span> Selected work</div>
+      <div class="section-label"><span>06</span> Selected work</div>
       <h2 class="h-display">Recent work.<br><em>Real</em> numbers.</h2>
     </div>
 
@@ -3736,7 +3884,7 @@ section { position: relative; z-index: 2; }
 <section class="process" id="process">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-label"><span>06</span> How we work</div>
+      <div class="section-label"><span>07</span> How we work</div>
       <h2 class="h-display">Curated, not packaged.<br><em>Two weeks</em> from kickoff to live.</h2>
     </div>
 
@@ -3781,7 +3929,7 @@ section { position: relative; z-index: 2; }
 <section class="pricing pricing-v2" id="pricing">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-label"><span>07</span> Curated stacks</div>
+      <div class="section-label"><span>08</span> Curated stacks</div>
       <h2 class="h-display">Three starting points.<br>Your stack is <em>curated from here.</em></h2>
       <p class="section-sub">Three common shapes — but your stack will be curated to you. <a href="#curator">Use the AI curator</a> to draft yours in 30 seconds.</p>
     </div>
@@ -3861,7 +4009,7 @@ section { position: relative; z-index: 2; }
 <section class="faq" id="faq">
   <div class="container faq-inner">
     <div class="section-head reveal">
-      <div class="section-label"><span>08</span> Questions</div>
+      <div class="section-label"><span>09</span> Questions</div>
       <h2 class="h-display">Asked across<br>our <em>pilot kitchens.</em></h2>
     </div>
 
@@ -3910,7 +4058,7 @@ section { position: relative; z-index: 2; }
 <section class="contact" id="contact">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-label"><span>09</span> Contact</div>
+      <div class="section-label"><span>10</span> Contact</div>
       <h2 class="h-display">Start the <em>conversation.</em><br>We answer fast.</h2>
       <p class="section-sub">Three ways to reach us. Pick whichever's easiest — we read all of them and reply the same day.</p>
     </div>
@@ -3993,7 +4141,7 @@ section { position: relative; z-index: 2; }
           <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
             <circle cx="30" cy="34" r="22" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
             <circle cx="30" cy="34" r="10.5" fill="currentColor"></circle>
-            <rect x="42" y="14" width="9" height="4.5" rx="2.25" fill="currentColor"></rect>
+            <path d="M48.5 10l1.6 4.4 4.4 1.6-4.4 1.6-1.6 4.4-1.6-4.4-4.4-1.6 4.4-1.6z" fill="currentColor"></path>
           </svg>
           <div class="brand-text">
             <div class="brand-name">PLATEPIXEL</div>
