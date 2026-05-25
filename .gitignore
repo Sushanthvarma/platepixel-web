@@ -7,3 +7,6 @@ desktop.ini
 
 # Editor / OS junk
 Thumbs.db
+
+# Build tools (one-off extractor for Figma Make bundle)
+extract.js
