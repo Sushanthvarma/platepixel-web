@@ -3067,63 +3067,122 @@ section { position: relative; z-index: 2; }
   position: relative;
   z-index: 1;
 }
-.founder-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* Founder roster — editorial stacked rows, monogram + name + copper rule */
+.founder-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
 }
 @media (max-width: 840px) {
   .founder-grid { grid-template-columns: 1fr; gap: 32px; }
-  .founder-photos { max-width: 320px; }
+  .founder-roster { max-width: 420px; }
 }
-.founder-photo {
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
+.founder-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: stretch;
+  gap: 0;
   background:
-    radial-gradient(120% 80% at 30% 20%, rgba(193,154,114,.22), transparent 60%),
-    linear-gradient(160deg, #1a1410 0%, #221814 55%, #2e2118 100%);
-  border: 1px solid var(--line-strong);
+    linear-gradient(135deg, rgba(193,154,114,.05) 0%, rgba(34,24,20,.0) 55%),
+    var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  transition: border-color .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.founder-row:hover {
+  border-color: var(--copper);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -22px rgba(193,154,114,.35);
+}
+.founder-row::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, var(--copper) 40%, var(--copper) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+}
+.founder-row:hover::before { opacity: 1; }
+
+.founder-mark {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-}
-.founder-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
   background:
-    radial-gradient(2px 2px at 12% 30%, rgba(255,255,255,.06), transparent),
-    radial-gradient(1px 1px at 75% 20%, rgba(255,255,255,.05), transparent),
-    radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.04), transparent),
-    radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,.05), transparent);
-  pointer-events: none;
+    radial-gradient(100% 70% at 30% 25%, rgba(193,154,114,.18), transparent 65%),
+    linear-gradient(160deg, #1a1410 0%, #221814 60%, #271c15 100%);
+  border-right: 1px solid var(--line);
 }
-.founder-monogram {
+.founder-initial {
   font-family: var(--serif);
-  font-size: clamp(64px, 8vw, 96px);
   font-style: italic;
   font-weight: 400;
-  color: var(--copper-hi);
+  font-size: 44px;
   line-height: 1;
-  letter-spacing: -0.04em;
-  text-shadow: 0 4px 30px rgba(193,154,114,.25);
+  color: var(--copper-hi);
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 24px rgba(193,154,114,.28);
 }
-.founder-photo-tag {
+.founder-mark-dot {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--copper-hi);
+  opacity: 0.45;
+  box-shadow: 0 0 8px rgba(193,154,114,.6);
+}
+
+.founder-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px 22px;
+}
+.founder-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--text);
+}
+.founder-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  line-height: 1.4;
+  font-size: 10.5px;
+  letter-spacing: 0.26em;
   color: var(--text-3);
   text-transform: uppercase;
-  white-space: normal;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+.founder-rule {
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--copper);
+  opacity: 0.7;
+}
+
+.founder-roster-foot {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 4px 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+  text-transform: uppercase;
 }
 .founder-story {
   display: flex;
@@ -3155,8 +3214,11 @@ section { position: relative; z-index: 2; }
 .founder-sig b { color: var(--copper-hi); font-weight: 500; }
 
 @media (max-width: 540px) {
-  .founder-photos { gap: 14px; }
-  .founder-monogram { font-size: clamp(56px, 18vw, 80px); }
+  .founder-roster { gap: 12px; }
+  .founder-row { grid-template-columns: 72px 1fr; }
+  .founder-initial { font-size: 38px; }
+  .founder-info { padding: 14px 18px; }
+  .founder-name { font-size: 19px; }
 }
 
 /* ============ CONTACT ============ */
