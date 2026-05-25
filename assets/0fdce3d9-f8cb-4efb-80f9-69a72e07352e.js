@@ -257,7 +257,7 @@ Pick 2–5 services, ordered by priority. Use the exact service names from the l
   /* ---------- submit ---------- */
   async function submit() {
     const text = (input.value || '').trim();
-    if (text.length < 18) {
+    if (text.length < 40) {
       input.focus();
       input.style.borderColor = 'var(--copper)';
       setTimeout(() => { input.style.borderColor = ''; }, 1200);
